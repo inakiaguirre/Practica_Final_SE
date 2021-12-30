@@ -1,0 +1,31 @@
+
+Nota para instalar paquetes en windows:
+- En vez de sudo pip3, usar sólo pip
+- Ejecutar la ventana cmd como administrador
+
+
+sudo pip3 install --upgrade python-socketio==4.6.0
+
+sudo pip install --upgrade python-engineio==3.13.2
+
+sudo pip3 install --upgrade Flask-SocketIO==4.3.1
+
+sudo pip3 install prettyprint
+
+sudo pip3 install Flask-MQTT
+
+sudo pip install Flask-Bootstrap
+
+sudo pip3 install Flask
+
+sudo pip3 install flask-socketio
+
+sudo pip3 install gevent-websocket
+
+sudo pip3 install eventlet
+
+sudo pip3 install gevent
+
+sudo pip3 install favicon
+
+pip3 install requests

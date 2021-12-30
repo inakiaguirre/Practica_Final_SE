@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Análisis predictivo. Control de fabricación de turbinas </title>
+    <link rel="stylesheet" href='../../static/master.css'/>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+
+            var socket = io();
+            //var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+            socket.on('connect', function(msg) {
+                console.log('connect', msg);
+            });
+
+            socket.on('mqtt_mesagge', function(data) {
+                console.log(data);
+                jsondata = JSON.parse(data['payload']);
+                var text = "Temperatura: " + jsondata.temp + " Humedad: " + jsondata.humi;
+                var $textarea = $('#textArea_Log');
+                $textarea.val($textarea.val() + text + '\n');
+                $('#textArea_Log').append('<br>' + $('<div/>').text('logs #' + msg.count + ': ' + msg.data).html());
+            });
+        });
+    </script>
+</head>
+<body style="background-color:black;">
+
+    <h1 style="color:white;">Análisis predictivo. Control de fabricación de turbinas</h1>
+    <h3>
+        <a style="display: inline; font-size:140%; color: white;">Lecturas de Maquina 1</a>  
+    </h3>
+    <p style="color: white;">TEMP - HUM</p>
+
+    <p><textarea name="" id="textArea_Log" cols="30" rows="10"></textarea></p>
+    <br>
+
+    <p style="color: white;">Laura me sale el siguiente error cuando intenta enviarme la temperatura y la humedad al textArea y he sido
+        incapaz de arreglarlo:
+        XHR GEThttp://localhost:5000/socket.io/?EIO=3&transport=polling&t=NtD5xU0</p>
+
+    <br>
+        <a class="button" href="/home/m1">Volver</a>
+</body>
+</html>

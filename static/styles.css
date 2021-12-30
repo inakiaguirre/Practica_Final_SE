@@ -1,0 +1,132 @@
+/*Común entre las tres páginas_____________________________________________________*/
+/*Navegador*/
+nav {
+    float: left;
+}
+nav ul {
+    list-style: none;
+    overflow: hidden;
+}
+nav ul li {
+    float: left;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+nav ul li a {
+    display: block;
+    padding: 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+
+}
+nav ul li:hover {
+    background: rgba(105, 105, 105, 0.5);
+    border-radius: 20px;
+}
+
+.cabecera{
+    width: 97%;
+    position: fixed;
+    z-index: 10;
+    background: rgba(247, 247, 247, 0.9);
+}
+.cabecera img{
+    float: left;
+}
+img{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+/*FOOTER______________________________________________________________*/
+.piePagina{
+    background-color:rgb(34, 34, 34);
+    color: white;
+    width: 100%;
+    padding-bottom: 1%;
+    text-align: center;
+}
+
+.icono:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+/*TABLA_PIEPAGINA*/
+table {
+    margin-left: 10px;
+    width: 100%;
+    padding: 7.5px;
+ }
+ th, td {
+    width: 5%;
+    text-align: center;
+ }
+/*----------------------------------------------------------------------------------------------*/
+
+/*Pagina Inicio de sesion*/
+.pagContacto{
+    background-image: url("contacto.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 5px;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    background-attachment: fixed;
+}
+
+.viñetas{
+    background-color: white;
+    border-radius: 2px;
+    outline: none;     
+    border: 0.2rem solid rgb(218, 0, 0);     
+    border-radius: 0.8rem;
+    padding: 6px;
+    margin-left: 1%;
+    margin-bottom: 8px;
+    margin-top: 3px;
+    display: flex;
+}
+
+
+.cuerpo_pagContacto{
+    background-color:  rgba(247, 247, 247, 0.9);
+    font-weight: bold;
+    margin-top: 10%;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 8px;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.datosUsuario{
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-bottom: 15px;
+    border: 0.2rem solid darkblue;
+    width: 35%;
+    display: inline-block;
+}
+
+
+.botonEnviar{
+    margin-left: 85%;
+    border-radius: 0.3rem;
+    border: 0.1rem solid darkblue;
+}
+
+.botonEnviar:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
