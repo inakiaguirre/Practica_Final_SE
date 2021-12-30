@@ -3,6 +3,7 @@ import time
 import  RPi.GPIO as GPIO
 import smbus
 import dht_config
+import Adafruit_DHT
 
 
 #importar modulo del display LCD
@@ -33,30 +34,22 @@ pin_buzzer = 26
 
 #------------------------------------------------------------------
 
-
-
-
 def tempHum():
      
-    GPIO.setmode(GPIO.BCM)
+    sensor = Adafruit_DHT.DHT11 #Cambia por DHT22 y si usas dicho sensor
+    pin = 16 #Pin en la raspberry donde conectamos el sensor
+    humedad, temperatura = Adafruit_DHT.read_retry(sensor, pin)
 
-    gpio_pin_sensor = 16 
-    sensor = dht_config.DHT(gpio_pin_sensor) 
-    
-    while True:
-        humi, temp = sensor.read()
-        print('Humedad {0:.1f}%, Temperatura {1:.1f}'.format( humi, temp))
-   
-        time.sleep(1)
-    
-        return temp, humi
+    print ('Humedad: ' , humedad)
+    print ('Temperatura: ' , temperatura)
 
-tempHum()
+    return temperatura
+    
 
 def mostrarPantalla():
     pantalla = lcd.LCD_DISPLAY(i2c_adress)
     datos = tempHum()
-    pantalla.setText(datos)
+    pantalla.setText(str(datos))
     comprobarTemp(datos)
 
 def comprobarTemp(temp):
@@ -73,5 +66,5 @@ def comprobarTemp(temp):
         GPIO.output(pin_buzzer, False)
 
 
-
-mostrarPantalla()
+while True:
+    mostrarPantalla()
