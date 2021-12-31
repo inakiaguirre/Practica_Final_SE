@@ -49,7 +49,7 @@ def tempHum():
 def mostrarPantalla():
     pantalla = lcd.LCD_DISPLAY(i2c_adress)
     datos = tempHum()
-    pantalla.setText(str(datos))
+    pantalla.setText("Temp: " + str(datos))
     comprobarTemp(datos)
 
 def comprobarTemp(temp):
@@ -57,10 +57,22 @@ def comprobarTemp(temp):
     global pin_buzzer
     GPIO.setup(pin_buzzer, GPIO.OUT)
     
-    if temp > 22:
+    if 15 < temp < 25:
         print("Temperatura Correcta " + str(temp) + " C")
-    elif 25 < temp < 30:
+        
+    elif temp > 25:
+
         print("Temperatura Alta " + str(temp) + " C")
+        print('Buzzer ON')
+
+        GPIO.output(pin_buzzer, True)
+        time.sleep(0.5)
+        GPIO.output(pin_buzzer, False)
+
+    elif temp < 15:
+        print("Temperatura baja " + str(temp) + " C")
+
+        print('Buzzer ON')
         GPIO.output(pin_buzzer, True)
         time.sleep(0.5)
         GPIO.output(pin_buzzer, False)
