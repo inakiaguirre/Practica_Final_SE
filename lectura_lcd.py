@@ -2,8 +2,9 @@ import sys
 import time
 import  RPi.GPIO as GPIO
 import smbus
-import dht_config
 import Adafruit_DHT
+import dht_config
+
 
 
 #importar modulo del display LCD
