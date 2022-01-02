@@ -1,5 +1,4 @@
 import time
-import dht_config
 import RPi.GPIO as GPIO
 
 def main():

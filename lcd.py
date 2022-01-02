@@ -45,5 +45,3 @@ class LCD_DISPLAY():
             count += 1
             character_unicode = ord(c)
             self.bus.write_byte_data(self.i2c_adress,0x40,character_unicode)
-
-

@@ -1,13 +1,7 @@
-import sys
 import time
 import  RPi.GPIO as GPIO
 import smbus
 import Adafruit_DHT
-import dht_config
-
-
-
-#importar modulo del display LCD
 import lcd
 
 rev = GPIO.RPI_REVISION
@@ -43,7 +37,8 @@ def tempHum():
 
     print ('Humedad: ' , humedad)
     print ('Temperatura: ' , temperatura)
-
+    
+    
     return temperatura
     
 

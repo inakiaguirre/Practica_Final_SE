@@ -46,9 +46,9 @@ def movimiento(n):
     pwm.ChangeDutyCycle(angle_to_percent(angulo))
 
     if angulo == 180:
-        print("Techo abierto")
+        print("Techo abierto - Manual")
     else:
-        print("Techo cerrado")
+        print("Techo cerrado - Manual")
 
     print("El angulo actual es: " + str(angulo))
 
