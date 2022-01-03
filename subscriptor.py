@@ -15,9 +15,8 @@ GPIO.setmode(GPIO.BCM)
 eventlet.monkey_patch()
 app = Flask(__name__)
 app = Flask(__name__, template_folder='./templates')
-
-
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 # Direccion del broker
 # El hostname es la direccion IP del broker
 # Si el broker esta en la misma maquina que ejecuta este scritp,
@@ -31,44 +30,19 @@ app.config['SECRET_KEY'] = 'secret'
 mqtt = Mqtt(app)
 socketio = SocketIO(app)
 
-
-@socketio.on('message')
-def handleMessage(msg):
-    print('Message: ' + msg)
-    send(msg, broadcast=True)
-
 # Direccion del broker.
 hostname = 'localhost'
 
-# Definimos los topics para MQTT
-# Topics que nos subscribimos.
-ts_temp_hum = "t_temp_hum"
-ts_lumi = "t_lumi"
-ts_servo = "t_servo"
-ts_luz = "t_luz"
-
-# Nos subscribimos al topic.
-mqtt.subscribe(ts_temp_hum)
-mqtt.subscribe(ts_lumi)
-mqtt.subscribe(ts_servo)
-mqtt.subscribe(ts_luz)
-
-
-@mqtt.on_connect()
-def handle_connect(client, userdata, flags, rc):
-    print("Conectado, ready to rock :D ")
-
-#_________________________________________________________________
-
 # http://127.0.0.1:5000/home
-
 @app.route("/home")
 def home():
     return render_template('home.html')
+
 #_________________________________________________________________
 
 #  Dirección "home" -- registro de usuario
 # http://0.0.0.1:5000/
+@app.route("/", methods=["GET", "POST"])
 def sign_up():
     if request.method == "POST":
         req = request.form
@@ -87,17 +61,41 @@ def sign_up():
         
         if username == "ij" and password == "1":
             #REDIRECCIONAMOS a la página del menu
-            return redirect('home.html')
+            return redirect(f"/home")
         else:
             #REDIRECCIONAMOS A LA route de home (/)
             return redirect(f"/")
 
     return render_template("sign_up.html")
+#_________________________________________________________________
+
+@socketio.on('message')
+def handleMessage(msg):
+    print('Message: ' + msg)
+    send(msg, broadcast=True)
+
+# Definimos los topics para MQTT
+# Topics que nos subscribimos.
+ts_temp_hum = "t_temp_hum"
+ts_lumi = "t_lumi"
+ts_servo = "t_servo"
+ts_luz = "t_luz"
+
+# Nos subscribimos al topic.
+mqtt.subscribe(ts_temp_hum)
+mqtt.subscribe(ts_lumi)
+mqtt.subscribe(ts_servo)
+mqtt.subscribe(ts_luz)
+
+#_________________________________________________________________
+
+@mqtt.on_connect()
+def handle_connect(client, userdata, flags, rc):
+    print("Connected with result code "+str(rc))
 
 #_________________________________________________________________
 
 @mqtt.on_message()
-
 def recibirMensajes(client, userdata, message):
 
     data = dict(
@@ -131,7 +129,7 @@ def recibirMensajes(client, userdata, message):
         servo = mensaje_recibido_json["servo"]
         socketio.emit('mqtt_message_estado', data=servo)
 
+#_________________________________________________________________
 
-# export FLASK_APP=flaskqt
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)
