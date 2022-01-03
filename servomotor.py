@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-from time import sleep
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -46,11 +45,13 @@ def movimiento(n):
     pwm.ChangeDutyCycle(angle_to_percent(angulo))
 
     if angulo == 180:
-        print("Techo abierto - Manual")
+        print("Techo abierto")
     else:
-        print("Techo cerrado - Manual")
+        print("Techo cerrado")
 
     print("El angulo actual es: " + str(angulo))
+
+    return angulo
 
 
 while True:

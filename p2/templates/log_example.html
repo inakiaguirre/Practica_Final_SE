@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+  <title>parte2</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      // Cambiar la IP por la dirección IP de vuestro servidor FLASK
+      var socket = io.connect('http://127.0.0.1:5000');
+
+      socket.on('after connect', function (msg) {
+        console.log('After connect', msg);
+      });
+
+      socket.on('mqtt_message_example', function (data) {
+        console.log(data);
+        jsondata = JSON.parse(data['payload']);
+        var text = "Temp: " + jsondata.temp + " Hum: " + jsondata.humi;
+        var $textarea = $('#subscribe_messages1');
+        $textarea.val($textarea.val() + text + '\n');
+      })
+
+    });
+  </script>
+
+</head>
+
+<!--BODY-->
+<body class="m-3">
+  <h2>Uso de librerías flask_mqtt y flask_socketio</h2>
+
+  <h3> LOG : Temperatura - Humedad </h3>
+  <h2> --------------------------- </h2>
+  <h3>
+    <a>Temperatura - Humedad </a>
+    <div class="mt-3 col-xs-8">
+      <textarea id="subscribe_messages1" rows=15 readonly></textarea>
+    </div>
+  </h3>
+</body>
+
+<!--NAVEGACIÓN-->
+<nav class="navbar navbar-light bg-light fixed-bottom d-flex justify-content-between">
+  <div class=""></div>
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-outline-secondary m-2" onclick="location.href='http://127.0.0.1:5000/home/{{maquina}}'">Pagina Anterior</button>
+  </div>
+</nav>
+</html>

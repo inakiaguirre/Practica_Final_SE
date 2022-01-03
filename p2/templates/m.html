@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // Cambiar la IP por la dirección IP de vuestro servidor FLASK
+        var socket = io.connect('http://127.0.0.1:5000');
+
+        socket.on('after connect', function (msg) {
+            console.log('After connect', msg);
+        });
+
+        socket.on('mqtt_message_estado', function (data) {
+            console.log("estado", data);
+
+            let estado = document.getElementById('estado')
+            estado.textContent = data
+        })
+
+        socket.on('mqtt_message_temperatura_cpu', function (data) {
+            console.log("temp cpu", data);
+
+            let temp_cpu = document.getElementById('temp_cpu')
+            temp_cpu.textContent = data
+        })
+    });
+</script>
+
+
+<div class="p-5">
+    {% if maquina == "m1" %}
+    <h2>Lecturas de máquina 1</h2>
+    {% else %}
+    <h2>Lecturas de máquina 2</h2>
+    {% endif %}
+    <p>*****************************</p>
+
+    <div class="d-flex">
+        <h3 class="mr-2">Temperatura CPU sistema:</h3>
+        <h3 class="mr-1" id="temp_cpu">-</h3>
+        <h3>Cº</h3>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-outline-primary mt-4"
+        onclick="location.href='http://127.0.0.1:5000/home/{{maquina}}/log-ejemplo'">log
+        valores</button>
+    </div>
+
+    <div class="my-4 d-flex justi">
+        <h3 class="mr-2">Estado de la máquina:</h3>
+        {% if estado %}
+        <h3 class="" id="estado">{{estado}}</h3>
+        {% else %}
+        <h3 class="" id="estado">-</h3>
+        {% endif %}
+    </div>
+
+    <div class="d-flex">
+        <button class="btn btn-success p-2 my-1 mr-1" type="button"
+            onclick="location.href='http://127.0.0.1:5000/home/{{maquina}}/encender'">Forzar encendido</button>
+        <button class="btn btn-outline-danger p-2 my-1 ml-1" type="button"
+            onclick="location.href='http://127.0.0.1:5000/home/{{maquina}}/apagar'">Forzar apagado</button>
+    </div>
+</div>
+
+<!--NAVEGACIÓN-->
+<nav class="navbar navbar-light bg-light fixed-bottom d-flex justify-content-between">
+    <div class=""></div>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-outline-secondary m-2" onclick="location.href='http://127.0.0.1:5000/home'">Pagina Anterior</button>
+    </div>
+  </nav>
+  </html>

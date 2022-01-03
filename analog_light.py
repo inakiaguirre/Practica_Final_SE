@@ -42,6 +42,8 @@ def main():
             print("Luz apagada")
         
         time.sleep(2)
+    
+        return sensor.light
 
 if __name__ == '__main__':
     main()

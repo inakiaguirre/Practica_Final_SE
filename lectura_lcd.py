@@ -3,6 +3,7 @@ import  RPi.GPIO as GPIO
 import smbus
 import Adafruit_DHT
 import lcd
+import analog_light
 
 rev = GPIO.RPI_REVISION
 if rev == 2 or rev == 3:
@@ -43,10 +44,13 @@ def tempHum():
     
 
 def mostrarPantalla():
-    pantalla = lcd.LCD_DISPLAY(i2c_adress)
-    datos = tempHum()
-    pantalla.setText("Temp: " + str(datos))
-    comprobarTemp(datos)
+    while True:
+        pantalla = lcd.LCD_DISPLAY(i2c_adress)
+        datos = tempHum()
+        pantalla.setText("Temp: " + str(datos))
+        comprobarTemp(datos)
+        print()
+        time.sleep(2)
 
 def comprobarTemp(temp):
 
@@ -55,6 +59,7 @@ def comprobarTemp(temp):
     
     if 15 < temp < 25:
         print("Temperatura Correcta " + str(temp) + " C")
+        GPIO.output(pin_buzzer, False)
         
     elif temp > 25:
 
@@ -74,5 +79,6 @@ def comprobarTemp(temp):
         GPIO.output(pin_buzzer, False)
 
 
-while True:
+if __name__ == '__main__':
     mostrarPantalla()
+

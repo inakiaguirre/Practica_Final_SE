@@ -1,0 +1,329 @@
+/*Común entre las tres páginas_____________________________________________________*/
+/*Navegador*/
+nav {
+    float: left;
+}
+nav ul {
+    list-style: none;
+    overflow: hidden;
+}
+nav ul li {
+    float: left;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+nav ul li a {
+    display: block;
+    padding: 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+
+}
+nav ul li:hover {
+    background: rgba(105, 105, 105, 0.5);
+    border-radius: 20px;
+}
+
+.cabecera{
+    width: 97%;
+    position: fixed;
+    z-index: 10;
+    background: white;
+    border: 0.2rem solid rgb(179, 255, 0);   
+    border-radius: 10px;  
+
+}
+.cabecera img{
+    margin-top: auto;
+    float: left;
+}
+img{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+/*FOOTER______________________________________________________________*/
+.piePagina{
+    background-color:rgb(34, 34, 34);
+    color: white;
+    width: 100%;
+    padding-bottom: 1%;
+    text-align: center;
+}
+
+.icono:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+/*TABLA_PIEPAGINA*/
+table {
+    margin-left: 10px;
+    width: 100%;
+    padding: 7.5px;
+ }
+ th, td {
+    width: 5%;
+    text-align: center;
+ }
+/*----------------------------------------------------------------------------------------------*/
+
+/*Pagina INICIO*/
+.pagInicio {
+    background-image: url("img_paginaInicio.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 5px;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    background-attachment: fixed;
+}
+
+
+main{
+    margin-top: 15%;
+}
+
+h1{
+    color: black;
+    text-align: center;
+    float: left;
+}
+h2{
+    text-align: center;
+    color: black;
+}
+
+h3{
+    text-align: center;
+    color: black;
+    text-align: center;
+    font-style: italic;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p{
+    text-align: justify center;
+    line-height: 1.5em;
+}
+
+.textarea{
+    text-align: center;
+    border-radius: 2px;
+    outline: none;     
+    border: 0.2rem solid black;     
+    border-radius: 0.8rem;
+    padding: 6px;
+    margin-left: 1%;
+    margin-bottom: 8px;
+    margin-top: 3px;
+}
+
+/*Secciones del main de la pagina de inicio*/
+.seccion_Nosotros{
+    margin-left: 60px;
+    margin-right: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 1px;
+    margin-top: -40px;
+    width: 25%;
+    background-color:  rgba(247, 247, 247, 0.8);
+    text-align: center;
+    border-radius: 20px;
+    display: inline-table;
+}
+
+.imgLema{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin-left: -2%;
+    width: 100%;
+}
+
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: sans-serif;
+    font-size: 22px;
+    font-style: italic;
+}
+
+/*Pagina PLANTAS 4.0____________________________________*/
+.pagPlantas{
+    background-image: url("img_plantas4.0.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 5px;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    background-attachment: fixed;
+}
+.cuerpo_pagPlantas{
+    background-color:  rgba(247, 247, 247, 0.9);
+    margin-top: 10%;
+    margin-bottom: 3%;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    text-align: center;
+ 
+}
+
+.flecha{
+    margin-left: 35%;
+    margin-bottom: 90px;
+}
+
+.bloque1{
+    width: 35%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: justify;
+    border-radius: 2px;
+    outline: none;         
+    border-radius: 3rem;
+    margin-bottom: -270px;
+    float: initial;
+}
+
+.video{
+    margin-top: 5%;
+}
+iframe{
+    border: 10px solid rgba(113, 162, 0, 0.7);
+    border-radius: 20px;
+}
+
+.pagPlantas h2{
+    text-align: center;
+    color: darkblue;
+}
+
+.bloque2 img{
+    border-radius: 20px;
+}
+
+/*Pagina Contacto__________________________________________*/
+.pagContacto{
+    background-image: url("contacto.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 5px;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    background-attachment: fixed;
+}
+
+.viñetas{
+    border-radius: 2px;
+    outline: none;     
+    border: 0.2rem solid rgb(113, 162, 0);     
+    border-radius: 0.8rem;
+    padding: 6px;
+    margin-left: 1%;
+    margin-bottom: 8px;
+    margin-top: 3px;
+    display: flex;
+}
+.ubicacion{
+    border-radius: 2px;
+    outline: none;     
+    border: 0.2rem solid rgb(113, 162, 0);     
+    border-radius: 0.8rem;
+    padding: 6px;
+    margin-left: 1%;
+    margin-bottom: 38px;
+    margin-top: 3px;
+    display: flex;
+}
+
+.cuerpo_pagContacto{
+    background-color:  rgba(247, 247, 247, 0.9);
+    font-weight: bold;
+    margin-top: 10%;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 8px;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.datosUsuario{
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-bottom: 15px;
+    border: 0.2rem solid darkblue;
+    width: 35%;
+    display: inline-block;
+}
+
+.consulta{
+    border: 0.2rem ;
+    border-radius: 20px;
+    border: 0.2rem solid darkblue;
+    float: right;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+legend{
+    text-align: center;
+    
+}
+
+.comentario{
+    outline: none;     
+    border: 0.1rem solid rgba(113, 162, 0, 0.8);     
+    border-radius: 0.5rem;
+}
+
+.condiciones{
+    margin-left: 47%;
+    margin-top: -90px;
+    text-align: justify;
+}
+
+.botonEnviar{
+    margin-left: 85%;
+    border-radius: 0.3rem;
+    border: 0.1rem solid darkblue;
+}
+
+.botonEnviar:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.mapa{
+    text-align: center;
+}
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<head>
+  <title>CONTROL DE ACCESO AL SISTEMA</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Introducir credenciales</h2>
+        <hr>
+        <form action="/" method="POST">
+          <div class="form-group">
+            <label>NOMBRE USUARIO </label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="nombre de usuario">
+          </div>
+          <br><br>
+          <div class="form-group">
+            <label>CONTRASEÑA </label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Contrasena">
+          </div>
+          <br><br>
+          <button type="submit" class="btn btn-primary">ENTRAR</button>
+          {% if feedback %}
+          <p class="text-danger float-right">{{ feedback }}</p>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

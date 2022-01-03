@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pagina Contacto</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="Captura.PNG">
+</head>
+
+<body class="pagContacto">
+    <!--Cabecera de la pagina WEB-->
+    <header class="cabecera">
+
+        <a href="codigo.html"><img src="logo-mispe.png" width="125px" height="50px"></a>
+        <nav>
+            <ul>
+                <li><a href="codigo.html">Inicio</a></li>
+                <li><a href="Plantas_4.0.html">Plantas 4.0</a></li>
+                <li><a href="pagina_contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cuerpo_pagContacto">
+        <form>
+
+            <fieldset class="datosUsuario">
+                <legend>DATOS DEL USUARIO</legend>
+
+                <label for="nombre"> Nombre: </label>
+                <input type="text" id="nombre" class="viñetas" placeholder="Jon">
+                <label for="apellido"> Apellido: </label>
+                <input type="text" id="apellido" class="viñetas" placeholder="Pérez">
+                <label for="email">Email: </label>
+                <input type="text" id="email" class="viñetas" placeholder="mispe@mispe.com">
+
+                <label for="ubicacion">Ubicación: </label>
+                <select id="ubicacion" name="groups" class="ubicacion">
+                    <optgroup label="Pais Vasco">
+                        <option>Álava / Araba</option>
+                        <option>Gipuzkoa</option>
+                        <option>Vizcaya</option>
+                    </optgroup>
+                    <optgroup label="Navarra">
+                        <option>Pamplona</option>
+                    </optgroup>
+                    <optgroup label="La Rioja">
+                        <option>Logroño</option>
+                    </optgroup>
+                </select>
+                <p>Gremio al que pertenece su empresa:</p>
+                <input class="" type="radio" name="Gremio" value="Comercio">Comercio<br>
+                <input type="radio" name="Gremio" value="Particular">Particular<br>
+                <input type="radio" name="Gremio" value="Industrial">Industrial<br>
+                <input type="radio" name="Gremio" value="Industria 4.0">Industria 4.0
+                <br>
+            </fieldset>
+
+            <fieldset class="consulta">
+                <legend>CONSULTA</legend>
+                <label for="date">Fecha y hora de la consulta:</label><br><br>
+                <input type="date" name="fecha" value="dd/mm/aaaa">
+                <input type="time" name="hora" value="--:--"><br><br>
+                <label for="comentarios">¿En qué podemos ayudarte?</label><br><br>
+                <textarea name="comentarios" rows="10" cols="50" class="comentario"
+                    placeholder="Escribe tu consulta aquí"></textarea><br><br>
+            </fieldset>
+
+            <section class="condiciones">
+                <input type="checkbox"> Haciendo click Ud. acepta la política de privacidad de este sitio web. Los datos
+                personales que nos facilite serán tratados para la gestión de su solicitud previo su
+                consentimiento.<br><br>
+                <input type="submit" value="Enviar" class="botonEnviar">
+            </section>
+
+            <hr />
+            <section class="mapa">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.381633594536!2d-2.6673366852239724!3d42.86478847915625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4fc2511ea6fcbb%3A0x224671138e3b81ee!2sMISPE%20PROYECTOS%20Y%20CONSTRUCCIONES%20S.L.U.!5e0!3m2!1ses!2ses!4v1615636515810!5m2!1ses!2ses"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </section>
+
+        </form>
+    </main>
+
+    <!--Pie de pagina-->
+    <footer class="piePagina">
+        <hr />
+        <table>
+            <tr>
+
+                <th>Empresa</th>
+                <th>Dirección</th>
+                <th>C.P.</th>
+                <th>Teléfono</th>
+                <th>Correo Electrónico</th>
+            </tr>
+            <tr>
+                <td>MISPE Proyectos y Cnes. S.L.U.</td>
+                <td>Avda. del Cantábrico 12 pabellón 28</td>
+                <td>01013</td>
+                <td>945 122 206</td>
+                <td>mispe@mispe.com</td>
+            </tr>
+        </table>
+        <a href="https://twitter.com/?lang=es"><img class="icono" src="logo_twitter.png" width="55px" height="55px"></a>
+        <a href="https://www.instagram.com/?hl=es"><img class="icono" src="logo_instagram.png" width="55px"
+                height="55px"></a>
+        <a href="https://www.linkedin.com/in/jon-pérez-martín/"><img class="icono" src="logo_linkedin.png" width="55px"
+                height="55px"></a>
+    </footer>
+
+</body>
+
+</html>
