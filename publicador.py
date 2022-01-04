@@ -19,7 +19,6 @@ GPIO.setmode(GPIO.BCM)
 pin_sensor = 16 
 pin_luz = 5
 pin_boton = 6
-pin_servo = GPIO.PWM(12, 50)
 
 sh = SlotHelper(SlotHelper.ADC)
 pin = sh.argv2pin()
@@ -42,7 +41,6 @@ tp_temp_hum = "t_temp_hum"
 tp_lumi = "t_lumi"
 tp_servo = "t_servo"
 tp_luz = "t_luz"
-
 
 #_________________________________________________________________
 
@@ -74,16 +72,18 @@ client.loop_start()
 
 angulo = 0
 luminosidad = 0
+pin = 12
+frecuencia = 50
+
+
+sensor = dht_config.DHT(pin_sensor) 
+miservo = servomotor.SERVOMOTOR(pin, frecuencia)
+
 
 while True:
 
-    # Declaramos el sensor de temperatura y humedad
-    sensor = dht_config.DHT(pin_sensor)
-    # Obtenemos el valores de la humedad y la temperatura y lo guardamos en dos variables. 
-    humi, temp = sensor.read()  
-
-    servo = servomotor.movimiento(angulo)
-
+    humi, temp = sensor.read() 
+    servo = miservo.movimiento()
     lumi = analog_light.main(luminosidad)
 
     # Creamos un diccionario con los valores que vamos a publicar

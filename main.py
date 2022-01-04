@@ -71,14 +71,20 @@ def comprobarTemp(temp):
     global pin_buzzer
     GPIO.setup(pin_buzzer, GPIO.OUT)
     
-    if 15 < temp < 25:
+    if 15 < temp <= 25:
         print("Temperatura Correcta " + str(temp) + " C")
         GPIO.output(pin_buzzer, False)
+        pwm.ChangeDutyCycle(2.5)
+        print("ESTADO DEL TECHO:")
+        print("Techo cerrado")
         
     elif temp > 25:
 
         print("Temperatura Alta " + str(temp) + " C")
         print('Buzzer ON')
+        pwm.ChangeDutyCycle(12.5)
+        print("ESTADO DEL TECHO:")
+        print("Techo abierto")
 
         GPIO.output(pin_buzzer, True)
         time.sleep(0.5)
@@ -86,11 +92,15 @@ def comprobarTemp(temp):
 
     elif temp < 15:
         print("Temperatura baja " + str(temp) + " C")
+        pwm.ChangeDutyCycle(2.5)
 
         print('Buzzer ON')
         GPIO.output(pin_buzzer, True)
         time.sleep(0.5)
         GPIO.output(pin_buzzer, False)
+
+        print("ESTADO DEL TECHO:")
+        print("Techo cerrado")
 
 
 #________________________________________________________________________________________________
@@ -107,8 +117,8 @@ def angle_to_percent (angle):
     if angle > 180 or angle < 0:
         return False
 
-    start = 2
-    end = 10.5
+    start = 2.5
+    end = 12.5
     ratio = (end - start)/180 #Calcular el porcentaje de ratio
 
     angle_as_percent = angle * ratio
@@ -135,10 +145,10 @@ def movimiento(n):
 
     if angulo == 180:
         print("ESTADO DEL TECHO:")
-        print("Techo abierto")
+        print("Techo abierto - Manual")
     else:
         print("ESTADO DEL TECHO:")
-        print("Techo cerrado")
+        print("Techo cerrado - Manual")
 
     print("El angulo actual es: " + str(angulo))
     print()
