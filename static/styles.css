@@ -190,28 +190,7 @@ p{
  
 }
 
-.flecha{
-    margin-left: 35%;
-    margin-bottom: 90px;
-}
 
-.bloque1{
-    width: 35%;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: justify;
-    border-radius: 2px;
-    outline: none;         
-    border-radius: 3rem;
-    margin-bottom: -270px;
-    float: initial;
-}
-
-.video{
-    margin-top: 5%;
-}
 iframe{
     border: 10px solid rgba(113, 162, 0, 0.7);
     border-radius: 20px;
@@ -227,8 +206,8 @@ iframe{
 }
 
 /*Pagina Contacto__________________________________________*/
-.pagContacto{
-    background-image: url("contacto.jpg");
+.pagLogin{
+    background-image: url("tierra.jpg");
     background-repeat: no-repeat, repeat;
     background-size: cover;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -245,7 +224,7 @@ iframe{
 .viñetas{
     border-radius: 2px;
     outline: none;     
-    border: 0.2rem solid rgb(113, 162, 0);     
+    border: 0.2rem solid rgb(179, 255, 0);     
     border-radius: 0.8rem;
     padding: 6px;
     margin-left: 1%;
@@ -253,19 +232,8 @@ iframe{
     margin-top: 3px;
     display: flex;
 }
-.ubicacion{
-    border-radius: 2px;
-    outline: none;     
-    border: 0.2rem solid rgb(113, 162, 0);     
-    border-radius: 0.8rem;
-    padding: 6px;
-    margin-left: 1%;
-    margin-bottom: 38px;
-    margin-top: 3px;
-    display: flex;
-}
 
-.cuerpo_pagContacto{
+.cuerpo_pagLogin{
     background-color:  rgba(247, 247, 247, 0.9);
     font-weight: bold;
     margin-top: 10%;
@@ -279,37 +247,9 @@ iframe{
     border-radius: 20px;
 }
 
-.datosUsuario{
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding-bottom: 15px;
-    border: 0.2rem solid darkblue;
-    width: 35%;
-    display: inline-block;
-}
-
-.consulta{
-    border: 0.2rem ;
-    border-radius: 20px;
-    border: 0.2rem solid darkblue;
-    float: right;
-    background-color: rgba(255, 255, 255, 0.8);
-}
 legend{
     text-align: center;
     
-}
-
-.comentario{
-    outline: none;     
-    border: 0.1rem solid rgba(113, 162, 0, 0.8);     
-    border-radius: 0.5rem;
-}
-
-.condiciones{
-    margin-left: 47%;
-    margin-top: -90px;
-    text-align: justify;
 }
 
 .botonEnviar{
@@ -321,9 +261,5 @@ legend{
 .botonEnviar:hover{
     transform: scale(1.1);
     cursor: pointer;
-}
-
-.mapa{
-    text-align: center;
 }
 

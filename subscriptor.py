@@ -12,7 +12,10 @@ import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-eventlet.monkey_patch()
+# Direccion del broker.
+hostname = 'localhost'
+
+#eventlet.monkey_patch()
 app = Flask(__name__)
 app = Flask(__name__, template_folder='./templates')
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -30,8 +33,6 @@ app.config['SECRET_KEY'] = 'secret'
 mqtt = Mqtt(app)
 socketio = SocketIO(app)
 
-# Direccion del broker.
-hostname = 'localhost'
 
 # http://127.0.0.1:5000/home
 @app.route("/home")
