@@ -2,6 +2,8 @@
 <html>
 
 <head>
+  <integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <meta charset="utf-8">
   <title>Pagina Inicio</title>
   <link rel="stylesheet" href='../../static/styles.css'>
@@ -9,6 +11,8 @@
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
   <script type="text/javascript">
+
+  
     $(document).ready(function () {
 
       // Cambiar la IP por la dirección IP de vuestro servidor FLASK
@@ -18,11 +22,20 @@
         console.log('After connect', msg);
       });
 
-      socket.on('mqtt_message_example', function (data) {
+      socket.on('mqtt_message_example', function (humi) {
         console.log(data);
         jsondata = JSON.parse(data['payload']);
+
         var text = "Temp: " + jsondata.temp + " Hum: " + jsondata.humi;
         var $textarea = $('#subscribe_messages1');
+
+        var text = "Estado del techo: " + jsondata.servo;
+        var $textarea = $('#subscribe_messages2');
+
+        var text = "Luminosidad: " + jsondata.lumi + " Luz: " + jsondata.estadoLuz;
+        var $textarea = $('#subscribe_messages3');
+
+
         $textarea.val($textarea.val() + text + '\n');
       })
 
@@ -55,14 +68,14 @@
     <section class="seccion_Nosotros">
       <h2>✘ SENSOR LUMINOSIDAD ✘</h2>
       <div class="textarea">
-        <textarea id="subscribe_messages1" rows=15 readonly></textarea>
+        <textarea id="subscribe_messages3" rows=15 readonly></textarea>
       </div>
     </section>
 
     <section class="seccion_Nosotros">
       <h2>✘ ESTADO DEL TECHO ✘</h2>
       <div class="textarea">
-        <textarea id="subscribe_messages1" rows=15 readonly></textarea>
+        <textarea id="subscribe_messages2" rows=15 readonly></textarea>
       </div>
     </section>
   </main>

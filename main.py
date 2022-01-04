@@ -63,7 +63,7 @@ def tempHum():
 def mostrarPantalla():
     pantalla = lcd.LCD_DISPLAY(i2c_adress)
     temperatura, humedad = tempHum()
-    pantalla.setText("Temp: " + str(temperatura))
+    pantalla.setText("Temp: " + str(temperatura) + "      Hum: " + str(humedad))
     comprobarTemp(temperatura)
     print()
 
@@ -119,7 +119,6 @@ def comprobarTemp(temp):
 # SERVOMOTOR
 
 masMenos = True
-
 #Inicializacion angulo a 0 grados
 angulo = 0
 
@@ -229,10 +228,9 @@ hostname = 'localhost'
 
 # Definimos los topics para MQTT
 # Topics que publicamos.
-tp_temp_hum = "t_temp_hum"
-tp_lumi = "t_lumi"
+tp_temhum = "t_temhum"
 tp_servo = "t_servo"
-tp_luz = "t_luz"
+tp_lumi = "t_lumi"
 
 #_________________________________________________________________
 
@@ -274,19 +272,33 @@ if __name__ == '__main__':
         lumi, estadoLuz = main()
 
         # Creamos un diccionario con los valores que vamos a publicar
-        mensaje = {
+        mensaje1 = {
             
             "humi": humi,
-            "temp": temp,
-            "servo": servo,
+            "temp": temp
+
+        }
+
+        mensaje2 = {
+
+            "servo": servo
+
+        }
+
+        mensaje3 = {
+
             "lumi": lumi,
             "estadoLuz": estadoLuz
 
         }
-
         # Convertimos los mensaje en tipo JSON
-        mensaje_json = json.dumps(mensaje)
+        mensaje_json1 = json.dumps(mensaje1)
+        mensaje_json2 = json.dumps(mensaje2)
+        mensaje_json3 = json.dumps(mensaje3)
 
         # Publicamos todos los topics
-        publish.multiple([[tp_temp_hum, mensaje_json], [tp_lumi, mensaje_json], [tp_servo, mensaje_json]], hostname=hostname)
+        publish.single(tp_temhum, mensaje_json1, hostname=hostname)
+        publish.single(tp_servo, mensaje_json2, hostname=hostname)
+        publish.single(tp_lumi, mensaje_json3, hostname=hostname)
+        
         time.sleep(2)

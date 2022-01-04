@@ -72,18 +72,18 @@ def handleMessage(msg):
     print('Message: ' + msg)
     send(msg, broadcast=True)
 
+#_________________________________________________________________
+
 # Definimos los topics para MQTT
 # Topics que nos subscribimos.
-ts_temp_hum = "t_temp_hum"
-ts_lumi = "t_lumi"
+ts_temhum = "t_temhum"
 ts_servo = "t_servo"
-ts_luz = "t_luz"
-
+ts_lumi = "t_lumi"
 # Nos subscribimos al topic.
-mqtt.subscribe(ts_temp_hum)
-mqtt.subscribe(ts_lumi)
+mqtt.subscribe(ts_temhum)
 mqtt.subscribe(ts_servo)
-mqtt.subscribe(ts_luz)
+mqtt.subscribe(ts_lumi)
+
 
 #_________________________________________________________________
 
@@ -106,26 +106,26 @@ def recibirMensajes(client, userdata, message):
 
     # En caso de que el topic sea "t_temp_hum".
 
-    if message.topic == "t_temp_hum":
+    if message.topic == "t_temhum":
 
         humi = mensaje_recibido_json["humi"]
         temp = mensaje_recibido_json["temp"]
 
         socketio.emit('mqtt_message_example', data=data)
 
-    # En caso de que el topic sea "t_lumi".
+    elif message.topic == "t_servo":
+
+        servo = mensaje_recibido_json["servo"]
+        
+        socketio.emit('mqtt_message_servo', data=servo)
 
     elif message.topic == "t_lumi":
-        
+
+        estadoLuz = mensaje_recibido_json["estadoLuz"]
         lumi = mensaje_recibido_json["lumi"]
 
-        socketio.emit('mqtt_message_temperatura_cpu', data=lumi)
+        socketio.emit('mqtt_message_lumi', data=lumi)
 
-    # En caso de que el topic sea "t_servo".
-
-    elif message.topic == "t_servo":
-        servo = mensaje_recibido_json["servo"]
-        socketio.emit('mqtt_message_estado', data=servo)
 
 #_________________________________________________________________
 
