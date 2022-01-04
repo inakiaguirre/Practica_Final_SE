@@ -5,10 +5,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(6, GPIO.IN)
 GPIO.setup(12, GPIO.OUT)
-pwm = GPIO.PWM(12, 50)
 
-pin = 12
-frecuencia = 50
 
 
 masMenos = True
@@ -19,16 +16,15 @@ angulo = 0
 
 class SERVOMOTOR():
 
-    def _init_(self, pin, frecuencia):
+    def __init__(self, pin, frecuencia):
         self.pin = pin
         self.frecuencia = frecuencia
-        self.axis_anterior = 90
 
         GPIO.setup(self.pin, GPIO.OUT)
         self.pwm = GPIO.PWM(self.pin, self.frecuencia)
 
     #Funcion para calcular el angulo
-    def angle_to_percent (angle):
+    def angle_to_percent (self, angle = False):
         if angle > 180 or angle < 0:
             return False
 
@@ -41,10 +37,12 @@ class SERVOMOTOR():
         return start + angle_as_percent
 
     #Mover el servomotor a 0 grados siempre que empieze desde el prinicpio
-    pwm.start(angle_to_percent(0)) 
+    def anguloInicial(self):
+
+        self.pwm.start(self.angle_to_percent(0)) 
 
     #Funcion que suma de 10 en 10 hasta 180 y despues resta de 10 en 10 hasta 0 cada vez que pulsamos
-    def movimiento(n):
+    def movimiento(self, n = False):
         
         global angulo
         global masMenos
@@ -56,7 +54,7 @@ class SERVOMOTOR():
             angulo -= 180
             masMenos = True if angulo <= 0 else False
             
-        pwm.ChangeDutyCycle(SERVOMOTOR.angle_to_percent(angulo))
+        self.pwm.ChangeDutyCycle(SERVOMOTOR.angle_to_percent(angulo))
 
         if angulo == 180:
             print("Techo abierto")
@@ -66,9 +64,4 @@ class SERVOMOTOR():
         print("El angulo actual es: " + str(angulo))
 
         return angulo
-
-
-if __name__ == '__main__':
-    SERVOMOTOR()
-
 

@@ -9,9 +9,6 @@ import paho.mqtt.client as mqtt
 from flask_socketio import SocketIO, send
 import RPi.GPIO as GPIO
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-
 # Direccion del broker.
 hostname = 'localhost'
 

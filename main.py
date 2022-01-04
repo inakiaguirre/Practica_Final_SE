@@ -6,7 +6,9 @@ import lcd
 import time
 from grove.adc import ADC
 import RPi.GPIO as GPIO
-import time
+import paho.mqtt.publish as publish
+import paho.mqtt.client as mqtt
+import json
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -55,14 +57,14 @@ def tempHum():
     print ('Temperatura: ' , temperatura)
     
     
-    return temperatura
+    return temperatura, humedad
     
 
 def mostrarPantalla():
     pantalla = lcd.LCD_DISPLAY(i2c_adress)
-    datos = tempHum()
-    pantalla.setText("Temp: " + str(datos))
-    comprobarTemp(datos)
+    temperatura, humedad = tempHum()
+    pantalla.setText("Temp: " + str(temperatura))
+    comprobarTemp(temperatura)
     print()
 
 
@@ -77,6 +79,9 @@ def comprobarTemp(temp):
         pwm.ChangeDutyCycle(2.5)
         print("ESTADO DEL TECHO:")
         print("Techo cerrado")
+        print()
+
+        return "Techo Cerrado"
         
     elif temp > 25:
 
@@ -85,10 +90,13 @@ def comprobarTemp(temp):
         pwm.ChangeDutyCycle(12.5)
         print("ESTADO DEL TECHO:")
         print("Techo abierto")
+        print()
 
         GPIO.output(pin_buzzer, True)
         time.sleep(0.5)
         GPIO.output(pin_buzzer, False)
+
+        return "Techo Abierto"
 
     elif temp < 15:
         print("Temperatura baja " + str(temp) + " C")
@@ -101,6 +109,9 @@ def comprobarTemp(temp):
 
         print("ESTADO DEL TECHO:")
         print("Techo cerrado")
+        print()
+
+        return "Techo Cerrado"
 
 
 #________________________________________________________________________________________________
@@ -109,7 +120,7 @@ def comprobarTemp(temp):
 
 masMenos = True
 
-#InicializaciÃ³n angulo a 0 grados
+#Inicializacion angulo a 0 grados
 angulo = 0
 
 #FunciÃ³n para calcular el Ã¡ngulo
@@ -183,6 +194,8 @@ def main():
     sh = SlotHelper(SlotHelper.ADC)
     pin = sh.argv2pin()
 
+    estadoLuz = ""
+
     sensor = GroveLightSensor(pin)
 
     print('Detectando luz...')
@@ -193,21 +206,87 @@ def main():
             GPIO.output(5, GPIO.HIGH)
             print("Luz encendida")
             print()
+            estadoLuz = "Luz encendida"
         elif sensor.light >= 600:
             GPIO.output(5, GPIO.LOW)
             print("Luz apagada")
             print()
+
+            estadoLuz = "Luz Apagada"
         
         time.sleep(2)
     
-        return sensor.light
+        return sensor.light, estadoLuz
 
 #________________________________________________________________________________________________
+
+# PUBLICADOR
+
+# Direccion del broker.
+hostname = 'localhost'
+
+#_________________________________________________________________
+
+# Definimos los topics para MQTT
+# Topics que publicamos.
+tp_temp_hum = "t_temp_hum"
+tp_lumi = "t_lumi"
+tp_servo = "t_servo"
+tp_luz = "t_luz"
+
+#_________________________________________________________________
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code "+str(rc))
+
+
+def on_message(client, userdata, message):
+    
+    rec_values = message.payload.decode("utf-8")
+    rec_values_json = json.loads(rec_values)
+
+#_________________________________________________________________
+
+# Creamos un cliente MQTT
+client = mqtt.Client()
+
+# Definimos los callbacks para conectarnos y subscribirnos al topic
+client.on_connect = on_connect
+client.on_message = on_message
+
+# Conectamos al hosntame que se debe definir arriva
+client.connect(hostname, 1883, 60)
+
+# Inicialmos el loop de la siguiente manera:
+client.loop_start()
 
 
 if __name__ == '__main__':
 
+
+
     while True:
-        main()
+
         mostrarPantalla()
+
+        temp, humi = tempHum()
+        servo = comprobarTemp(temp)
+        lumi, estadoLuz = main()
+
+        # Creamos un diccionario con los valores que vamos a publicar
+        mensaje = {
+            
+            "humi": humi,
+            "temp": temp,
+            "servo": servo,
+            "lumi": lumi,
+            "estadoLuz": estadoLuz
+
+        }
+
+        # Convertimos los mensaje en tipo JSON
+        mensaje_json = json.dumps(mensaje)
+
+        # Publicamos todos los topics
+        publish.multiple([[tp_temp_hum, mensaje_json], [tp_lumi, mensaje_json], [tp_servo, mensaje_json]], hostname=hostname)
         time.sleep(2)

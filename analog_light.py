@@ -21,29 +21,26 @@ class GroveLightSensor(object):
         value = self.adc.read(self.channel)
         return value
 
-Grove = GroveLightSensor
 
 
-def main():
-    from grove.helper import SlotHelper
-    sh = SlotHelper(SlotHelper.ADC)
-    pin = sh.argv2pin()
+    def main(self):
+        from grove.helper import SlotHelper
+        sh = SlotHelper(SlotHelper.ADC)
+        pin = sh.argv2pin()
 
-    sensor = GroveLightSensor(pin)
+        sensor = GroveLightSensor(pin)
 
-    print('Detectando luz...')
-    while True:
-        print('Valor de luminosidad en el ambiente: {0}'.format(sensor.light))
-        if sensor.light < 600:
-            GPIO.output(5, GPIO.HIGH)
-            print("Luz encendida")
-        elif sensor.light >= 600:
-            GPIO.output(5, GPIO.LOW)
-            print("Luz apagada")
+        print('Detectando luz...')
+        while True:
+            print('Valor de luminosidad en el ambiente: {0}'.format(sensor.light))
+            if sensor.light < 600:
+                GPIO.output(5, GPIO.HIGH)
+                print("Luz encendida")
+            elif sensor.light >= 600:
+                GPIO.output(5, GPIO.LOW)
+                print("Luz apagada")
+            
+            time.sleep(2)
         
-        time.sleep(2)
-    
-        return sensor.light
+            return sensor.light
 
-if __name__ == '__main__':
-    main()
