@@ -2,8 +2,11 @@
 <html>
 
 <head>
-  <integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <title>Pagina Inicio</title>
   <link rel="stylesheet" href='../../static/styles.css'>
@@ -22,21 +25,33 @@
         console.log('After connect', msg);
       });
 
-      socket.on('mqtt_message_example', function (humi) {
+      socket.on('mqtt_message_example', function (data) {
         console.log(data);
         jsondata = JSON.parse(data['payload']);
 
         var text = "Temp: " + jsondata.temp + " Hum: " + jsondata.humi;
         var $textarea = $('#subscribe_messages1');
+        $textarea.val($textarea.val() + text + '\n');
+      })
+
+      socket.on('mqtt_message_servo', function (servo) {
+        console.log(data);
+        jsondata = JSON.parse(data['payload']);
 
         var text = "Estado del techo: " + jsondata.servo;
         var $textarea = $('#subscribe_messages2');
+        $textarea.val($textarea.val() + text + '\n');
+
+      })
+
+      socket.on('mqtt_message_lumi', function (lumi) {
+        console.log(data);
+        jsondata = JSON.parse(data['payload']);
 
         var text = "Luminosidad: " + jsondata.lumi + " Luz: " + jsondata.estadoLuz;
         var $textarea = $('#subscribe_messages3');
-
-
         $textarea.val($textarea.val() + text + '\n');
+
       })
 
     });

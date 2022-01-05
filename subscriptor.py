@@ -7,7 +7,7 @@ from flask_mqtt import Mqtt
 import paho.mqtt.publish as publish
 import paho.mqtt.client as mqtt
 from flask_socketio import SocketIO, send
-import RPi.GPIO as GPIO
+
 
 # Direccion del broker.
 hostname = 'localhost'
@@ -30,6 +30,14 @@ app.config['SECRET_KEY'] = 'secret'
 mqtt = Mqtt(app)
 socketio = SocketIO(app)
 
+#_________________________________________________________________
+
+@socketio.on('message')
+def handleMessage(msg):
+    print('Message: ' + msg)
+    send(msg, broadcast=True)
+    
+#_________________________________________________________________
 
 # http://127.0.0.1:5000/home
 @app.route("/home")
@@ -65,12 +73,7 @@ def sign_up():
             return redirect(f"/")
 
     return render_template("sign_up.html")
-#_________________________________________________________________
 
-@socketio.on('message')
-def handleMessage(msg):
-    print('Message: ' + msg)
-    send(msg, broadcast=True)
 
 #_________________________________________________________________
 
@@ -84,7 +87,6 @@ mqtt.subscribe(ts_temhum)
 mqtt.subscribe(ts_servo)
 mqtt.subscribe(ts_lumi)
 
-
 #_________________________________________________________________
 
 @mqtt.on_connect()
@@ -96,6 +98,9 @@ def handle_connect(client, userdata, flags, rc):
 @mqtt.on_message()
 def recibirMensajes(client, userdata, message):
 
+    print("Mensajes Recibidos")
+    
+
     data = dict(
         topic=message.topic,
         payload=message.payload.decode()
@@ -104,9 +109,13 @@ def recibirMensajes(client, userdata, message):
     rec_values = message.payload.decode("utf-8")
     mensaje_recibido_json = json.loads(rec_values)
 
-    # En caso de que el topic sea "t_temp_hum".
+    
 
     if message.topic == "t_temhum":
+
+        print("Topic: " + str(rec_values))
+
+        mensaje_recibido_json =json.loads(message.payload )
 
         humi = mensaje_recibido_json["humi"]
         temp = mensaje_recibido_json["temp"]
@@ -115,16 +124,20 @@ def recibirMensajes(client, userdata, message):
 
     elif message.topic == "t_servo":
 
+        print("Topic: " + str(rec_values))
+
         servo = mensaje_recibido_json["servo"]
         
         socketio.emit('mqtt_message_servo', data=servo)
 
     elif message.topic == "t_lumi":
 
+        print("Topic: " + str(rec_values))
+
         estadoLuz = mensaje_recibido_json["estadoLuz"]
         lumi = mensaje_recibido_json["lumi"]
 
-        socketio.emit('mqtt_message_lumi', data=lumi)
+        socketio.emit('mqtt_message_lumi', data=data)
 
 
 #_________________________________________________________________
