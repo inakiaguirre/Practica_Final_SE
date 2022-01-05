@@ -29,10 +29,10 @@ nav ul li:hover {
 .cabecera{
     width: 97%;
     position: fixed;
-    z-index: 10;
     background: white;
-    border: 0.2rem solid rgb(179, 255, 0);   
+    border: 0.2rem solid rgb(27, 161, 0);   
     border-radius: 10px;  
+    margin-bottom: auto;
 
 }
 .cabecera img{
@@ -46,10 +46,11 @@ img{
 
 /*FOOTER______________________________________________________________*/
 .piePagina{
+    margin-top: 30px;
     background-color:rgb(34, 34, 34);
     color: white;
     width: 100%;
-    padding-bottom: 1%;
+    padding-bottom: 3%;
     text-align: center;
 }
 
@@ -71,7 +72,7 @@ table {
 
 /*Pagina INICIO*/
 .pagInicio {
-    background-image: url("img_paginaInicio.jpg");
+    background-image: url("https://www.todofondos.net/wp-content/uploads/madera-hd-fondos-de-pantalla-fondos-fondos-1920-%C3%97-1080-madera-fondo-de-pantalla-hd.-fondo-para-computadora-hd-1080p-de-madera-1024x576.jpg");
     background-repeat: no-repeat, repeat;
     background-size: cover;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -87,7 +88,7 @@ table {
 
 
 main{
-    margin-top: 15%;
+    margin-top: 10%;
 }
 
 h1{
@@ -135,7 +136,7 @@ p{
     padding-bottom: 1px;
     margin-top: -40px;
     width: 25%;
-    background-color:  rgba(247, 247, 247, 0.8);
+    background-color:  rgba(247, 247, 247, 0.9);
     text-align: center;
     border-radius: 20px;
     display: inline-table;
@@ -160,43 +161,6 @@ p{
     font-style: italic;
 }
 
-/*Pagina PLANTAS 4.0____________________________________*/
-.pagPlantas{
-    background-image: url("img_plantas4.0.jpg");
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 5px;
-    width: 97%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    background-attachment: fixed;
-}
-.cuerpo_pagPlantas{
-    background-color:  rgba(247, 247, 247, 0.9);
-    margin-top: 10%;
-    margin-bottom: 3%;
-    padding-top: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 20px;
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 20px;
-    text-align: center;
- 
-}
-
-
-iframe{
-    border: 10px solid rgba(113, 162, 0, 0.7);
-    border-radius: 20px;
-}
-
 .pagPlantas h2{
     text-align: center;
     color: darkblue;
@@ -208,7 +172,6 @@ iframe{
 
 /*Pagina Contacto__________________________________________*/
 .pagLogin{
-    background-image: url("tierra.jpg");
     background-repeat: no-repeat, repeat;
     background-size: cover;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -264,3 +227,18 @@ legend{
     cursor: pointer;
 }
 
+.botonActualizar {
+    margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition-duration: 0.4s;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 0.3rem;
+    border: 0.1rem solid black;
+}
+  
+.botonActualizar:hover {
+background-color: rgb(77, 172, 59); /* Green */
+color: black;
+}

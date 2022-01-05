@@ -2,68 +2,20 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
   <title>Pagina Inicio</title>
   <link rel="stylesheet" href='../../static/styles.css'>
-  <link rel="shortcut icon" href="logo_invernadero.png">
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-  <script type="text/javascript">
-
-  
-    $(document).ready(function () {
-
-      // Cambiar la IP por la dirección IP de vuestro servidor FLASK
-      var socket = io.connect('http://127.0.0.1:5000');
-
-      socket.on('after connect', function (msg) {
-        console.log('After connect', msg);
-      });
-
-      socket.on('mqtt_message_example', function (data) {
-        console.log(data);
-        jsondata = JSON.parse(data['payload']);
-
-        var text = "Temp: " + jsondata.temp + " Hum: " + jsondata.humi;
-        var $textarea = $('#subscribe_messages1');
-        $textarea.val($textarea.val() + text + '\n');
-      })
-
-      socket.on('mqtt_message_servo', function (servo) {
-        console.log(data);
-        jsondata = JSON.parse(data['payload']);
-
-        var text = "Estado del techo: " + jsondata.servo;
-        var $textarea = $('#subscribe_messages2');
-        $textarea.val($textarea.val() + text + '\n');
-
-      })
-
-      socket.on('mqtt_message_lumi', function (lumi) {
-        console.log(data);
-        jsondata = JSON.parse(data['payload']);
-
-        var text = "Luminosidad: " + jsondata.lumi + " Luz: " + jsondata.estadoLuz;
-        var $textarea = $('#subscribe_messages3');
-        $textarea.val($textarea.val() + text + '\n');
-
-      })
-
-    });
-  </script>
+  <link rel="shortcut icon" href="/templates/logo_invernadero.png">
 </head>
 
 <body class="pagInicio">
-
+  
   <!--Cabecera de la pagina WEB-->
   <header class="cabecera">
 
-    <a href="/home"><img src="logo_invernadero.png" width="100px" height="100px"></a>
+    <a href="/home"><img src="https://st.depositphotos.com/2738857/4604/v/600/depositphotos_46042777-stock-illustration-eco-house-concept-green.jpg" width="100px" height="100px"></a>
     <nav>
       <ul>
         <li><a href="/home" id="inicio">Inicio</a></li>
@@ -73,25 +25,33 @@
 
   <!--Cuerpo de la pagina WEB-->
   <main>
+
+    <button class="botonActualizar" onclick="location.href='http://127.0.0.1:5000/home'">Actualizar Datos</button>
+    <br><br>
+    <br><br>
     <section class="seccion_Nosotros">
       <h2>✘ SENSOR TEMP - HUM ✘</h2>
-      <div class="textarea">
-        <textarea id="subscribe_messages1" rows=15 readonly></textarea>
-      </div>
+      <br>
+      <h3>Temperatura del Invernadero</h3>
+      <h4>{{temp}}</h4>
+      <h3>Humedad del Invernadero</h3>
+      <h4>{{humi}}</h4>
     </section>
 
     <section class="seccion_Nosotros">
       <h2>✘ SENSOR LUMINOSIDAD ✘</h2>
-      <div class="textarea">
-        <textarea id="subscribe_messages3" rows=15 readonly></textarea>
-      </div>
+      <br>
+      <h3>Luminosidad del Invernadero</h3>
+      <h4>{{lumi}}</h4>
+      <h3>Estado de la luz artificial</h3>
+      <h4>{{estadoLuz}}</h4>
+      
     </section>
 
     <section class="seccion_Nosotros">
       <h2>✘ ESTADO DEL TECHO ✘</h2>
-      <div class="textarea">
-        <textarea id="subscribe_messages2" rows=15 readonly></textarea>
-      </div>
+      <br>
+      <h4>{{servo}}</h4>
     </section>
   </main>
 
@@ -105,14 +65,15 @@
         <th>Dirección</th>
         <th>C.P.</th>
         <th>Teléfono</th>
-        <th>Correo Electrónico</th>
+        <th>Jon Pérez</th>
       </tr>
       <tr>
         <td>Domotic S.L.</td>
         <td>Calle Zurrupitieta - Júndiz</td>
         <td>01015</td>
         <td>945 122 206</td>
-        <td>domotic@green.com</td>
+        <td><strong>Iñaki Verastegui</strong></td>
+        
       </tr>
     </table>
   </footer>
